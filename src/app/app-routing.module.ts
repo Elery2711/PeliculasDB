@@ -9,8 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'add-product',
-    loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
+    path: 'add-movie',
+    loadChildren: () => import('./add-product/add-movie.module').then( m => m.AddMoviePageModule)
   },
   {
     path: 'login',

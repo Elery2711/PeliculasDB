@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Cart, Product, CartItem } from '../models/product.model';
+import { Cart, Pelicula, CartItem } from '../models/pelicula.model';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +14,43 @@ export class CartService {
     itemCount: 0
   };
 
-  constructor() { }
+  private cartHistorial: Observable<Cart[]>;
+
+  private cartCollection:AngularFirestoreCollection<Cart>;
+
+  constructor(private firestore:AngularFirestore) { 
+    this.cartCollection = this.firestore.collection<Cart>('carts');
+    this.cartHistorial = this.cartCollection.valueChanges();
+  }
+
+  public getCartH(): Observable<Cart[]> {
+    return this.cartHistorial;
+  }
 
   public getCart(): Cart {
     return this.cart;
   }
 
-  public addToCart(product: Product): Cart {
+  buyProducts(cart:Cart):Promise<string>{
+    return this.cartCollection.add(cart)
+      .then((doc)=>{
+        console.log('Productos comprados' + doc.id);
+        this.cart = {
+          items: [],
+          total: 0,
+          itemCount: 0
+        };
+        return 'success'
+      })
+      .catch((error)=>{
+        console.log('error de:'+ error);
+        return 'Error'
+      });
+  }
 
-    const existingCartItem = this.cart.items.find((item) => item.product.name === product.name);
+  public addToCart(movie: Pelicula): Cart {
+
+    const existingCartItem = this.cart.items.find((item) => item.movie.titulo === movie.titulo);
 
     if (existingCartItem) {
       // El producto ya existe en el carrito, actualiza la cantidad
@@ -28,7 +58,7 @@ export class CartService {
     } else {
       // El producto no existe en el carrito, agrégalo como un nuevo elemento
       const newItem: CartItem = {
-        product: product,
+        movie: movie,
         quantity: 1,
       };
       this.cart.items.push(newItem);
@@ -42,7 +72,7 @@ export class CartService {
   }
 
   private calculateTotal(cart: Cart): number {
-    return cart.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    return cart.items.reduce((total, item) => total + item.movie.precio * item.quantity, 0);
   }
 
   private calculateItemCount(cart: Cart): number {

@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddProductPageRoutingModule } from './add-product-routing.module';
+import { AddMoviePageRoutingModule } from './add-movie-routing.module';
 
-import { AddProductPage } from './add-product.page';
+import { AddMoviePage } from './add-movie.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddProductPageRoutingModule, 
+    AddMoviePageRoutingModule, 
     ReactiveFormsModule
   ],
-  declarations: [AddProductPage]
+  declarations: [AddMoviePage]
 })
-export class AddProductPageModule {}
+export class AddMoviePageModule {}

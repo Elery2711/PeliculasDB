@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductService } from '../services/product.service';
+import { MoviesService } from '../services/movies.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { async } from '@angular/core/testing';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.page.html',
-  styleUrls: ['./add-product.page.scss'],
+  selector: 'app-add-movie',
+  templateUrl: './add-movie.page.html',
+  styleUrls: ['./add-movie.page.scss'],
 })
-export class AddProductPage {
+export class AddMoviePage {
   public productForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService,
+    private moviesService: MoviesService,
     private toastController: ToastController,
     private router: Router
   ) {
@@ -30,26 +30,10 @@ export class AddProductPage {
 
   async saveProduct() {
     if (this.productForm.valid) {
-      const product = this.productForm.value;
-      /*this.productService.saveProduct(product).subscribe({
-        next: (response) => {
-          // next callback
-          console.log('Producto guardado exitosamente:', response);
-          // Aquí puedes realizar cualquier acción adicional después de guardar el producto
-        },
-        error: (error) => {
-          // error callback
-          console.error('Error al guardar el producto:', error);
-          // Aquí puedes manejar el error de guardar el producto
-        },
-        complete: () => {
-          // complete callback
-          console.log('Subscription completed.');
-        }
-      });*/
+      const movie = this.productForm.value;
 
-      this.productService
-        .saveProduct(product)
+      this.moviesService
+        .addMovie(movie)
         .then(async (response) =>{
           if (response == "success") {
             console.log('Producto guardado exitosamente:', response);

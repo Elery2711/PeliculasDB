@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { Cart, Product, CartItem } from '../models/product.model';
+import { CartService } from '../services/cart-service.service';
+import { Cart, Pelicula, CartItem } from '../models/pelicula.model';
 import { AlertController } from '@ionic/angular';
 
 
@@ -20,7 +20,7 @@ export class Tab2Page {
   async promptRemoveItem(item: CartItem) {
     const alert = await this.alertController.create({
       header: 'Eliminar Producto',
-      message: `¿Cuántos ${item.product.name} deseas eliminar?`,
+      message: `¿Cuántos ${item.movie.titulo} deseas eliminar?`,
       inputs: [
         {
           name: 'quantity',

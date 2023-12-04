@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Product } from '../models/product.model';
-import { CartService } from '../services/cart.service';
+import { Pelicula } from '../models/pelicula.model';
 import { Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
+import { MoviesService } from '../services/movies.service';
 import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -12,67 +12,57 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab1Page {
 
-  public products: Product[] = [];
-  public productsFounds: Product[] = [];
+  public movies: Pelicula[] = [];
+  public moviesFounds: Pelicula[] = [];
   public filter = [
-    "Abarrotes",
-    "Frutas y Verduras",
-    "Limpieza",
-    "Farmacia",
+    'Drama',
+    'Comedia',
+    'Acción',
+    'Terror',
+    'Ciencia Ficción',
+    'Musical',
+    'Infantil',
+    'Animación',
+    'Suspenso',
+    'Documental',
+    'Romance',
+    'Fantasía',
+    'Aventura',
+    'Bélico',
+    'Crimen',
+    'Misterio',
+    'Biográfico',
+    'Histórico',
+    'Deportivo',
+    'Western',
+    'Guerra'
   ];
 
-  public colors = [
-    {
-      type: "Abarrotes",
-      color: "primary"
-    },
-    {
-      type: "Frutas y Verduras",
-      color: "secondary"
-    },
-    {
-      type: "Limpieza",
-      color: "warning"
-    },
-    {
-      type: "Farmacia",
-      color: "danger"
-    }
-  ];
-
-  constructor(private cartService: CartService, private router: Router, private productService: ProductService, private authService: AuthService) {
-    this.productService.getProducts().subscribe((products: Product[]) => {
-      this.products = products;
-      this.productsFounds = this.products;
+  constructor(private cartService: CartService, private router: Router, private moviesService: MoviesService, private authService: AuthService) {
+    this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
+      this.movies = movies;
+      this.moviesFounds = this.movies;
     });
 
   }
 
-  public getColor(type: string): string {
-    const itemFound = this.colors.find((element) => {
-      return element.type === type;
-    });
-    let color = itemFound && itemFound.color ? itemFound.color : "";
-    return color;
-  }
-
-  public filterProducts(): void {
+  public filterMovies(): void {
     console.log(this.filter);
-    this.productsFounds = this.products.filter(
+    this.moviesFounds = this.movies.filter(
       item => {
-        return this.filter.includes(item.type);
+        return this.filter.includes(item.genero);
       }
     );
   }
 
-  public addToCart(product: Product, i: number) {
-    product.photo = product.photo + i;
-    this.cartService.addToCart(product);
+  public addToCart(movie: Pelicula, i: number) {
+    movie.portada = movie.portada + i;
+    this.cartService.addToCart(movie);
     console.log(this.cartService.getCart());
   }
 
-  openProductAddPage() {
-    this.router.navigate(['/add-product']); // Asume que la ruta 'product-add' existe para añadir productos.
+  openMovieAddPage() {
+    this.router.navigate(['/add-movie']); // Asume que la ruta 'product-add' existe para añadir productos.
   }
 
   public logout() {
