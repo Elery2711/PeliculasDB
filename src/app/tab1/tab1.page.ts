@@ -46,6 +46,19 @@ export class Tab1Page {
 
   }
 
+  openViewMovie(titulo:string) {
+    this.moviesService.pos = this.movies.findIndex(item => item.titulo == titulo);
+    this.moviesService.moviewhere = this.movies[this.moviesService.pos];
+    this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
+      this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
+    });
+    console.log(this.moviesService.moviewhere);
+    
+    
+    this.router.navigate(['/view-movie']);
+    
+  }
+
   public filterMovies(): void {
     console.log(this.filter);
     this.moviesFounds = this.movies.filter(
