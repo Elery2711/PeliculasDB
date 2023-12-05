@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label class="form-label" position="floating">Correo</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label class="form-label" position="floating">Contraseña</ion-label>
+      <ion-input class="form-control" formControlName="password" type="password"></ion-input>
+    </ion-item>
+    
+
+    <ion-button expand="full" type="submit">Enviar</ion-button>
+  </form>
+
+</ion-content>
+  
+
+
+
+
