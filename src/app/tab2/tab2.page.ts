@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CartService } from '../services/cart-service.service';
-import { Cart, Pelicula, CartItem } from '../models/pelicula.model';
+import { Cart, Pelicula, CartItem, Library } from '../models/pelicula.model';
 import { AlertController } from '@ionic/angular';
+import { LibraryService } from '../services/library.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class Tab2Page {
 
   public cart: Cart;
 
-  constructor(private cartService: CartService, private alertController: AlertController) {
+  constructor(private cartService: CartService, private alertController: AlertController, private LibraryService: LibraryService) {
     this.cart = this.cartService.getCart();
   }
 
@@ -48,6 +49,10 @@ export class Tab2Page {
     });
   
     await alert.present();
+  }
+
+  public addMovieToLibrary(movie: Pelicula): void {
+    this.LibraryService.updateLibrary(movie);
   }
 
 }

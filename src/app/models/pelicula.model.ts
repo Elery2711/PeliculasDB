@@ -20,3 +20,8 @@ export interface Cart {
   total: number;
   itemCount: number;
 }
+
+export interface Library {
+  items: Pelicula[];
+  user: string;
+}

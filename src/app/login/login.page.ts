@@ -41,7 +41,6 @@ export class LoginPage implements OnInit{
   async onSubmit() {
     this.userService.login(this.loginForm.value)
     .then(response => {
-
       this.router.navigate(['/tabs/tab1']);
       console.log(response);
     })
