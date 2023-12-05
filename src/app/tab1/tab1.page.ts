@@ -55,8 +55,7 @@ export class Tab1Page {
     );
   }
 
-  public addToCart(movie: Pelicula, i: number) {
-    movie.portada = movie.portada + i;
+  public addToCart(movie: Pelicula) {
     this.cartService.addToCart(movie);
     console.log(this.cartService.getCart());
   }
