@@ -52,7 +52,11 @@ export class Tab2Page {
   }
 
   public addMovieToLibrary(movie: Pelicula): void {
-    this.LibraryService.updateLibrary(movie);
+    this.LibraryService.createLibrary().then((doc) => {
+      console.log('Libreria creada' + doc);
+      this.LibraryService.addMovieToLibrary(movie, doc);
+    }
+    )
   }
 
 }

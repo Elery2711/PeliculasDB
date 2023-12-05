@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Pelicula, Library } from '../models/pelicula.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable, async } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,8 @@ export class LibraryService {
 
   private library: Observable<Library[]>;
 
-  private userID = localStorage.getItem('userID');
-
-  constructor(private firestore:AngularFirestore) { 
-    this.library = this.firestore.collection<Library>('library', ref => ref.where('user', '==', this.userID)).valueChanges();
+  constructor(private firestore:AngularFirestore, private userService: UserService) { 
+    this.library = this.firestore.collection<Library>('library').valueChanges();
   }
 
   public getLibrary(): Observable<Library[]> {
@@ -23,7 +22,7 @@ export class LibraryService {
   public createLibrary(): Promise<string> {
     const library: Library = {
       items: [],
-      user: localStorage.getItem('userID')!
+      user: this.getUsuario()!.uid
     };
     return this.firestore.collection('library').add(library)
       .then((doc)=>{
@@ -36,13 +35,45 @@ export class LibraryService {
       });
   }
 
-  public updateLibrary(movie: Pelicula): Promise<string> {
-    this.createLibrary();
-
-    return this.firestore.collection('library').doc(localStorage.getItem('userID')!).update({
+  public addMovieToLibrary(movie: Pelicula, doc: any): Promise<string> {
+    return this.firestore.collection('library').doc(doc).update({
       items: movie
     })
-      .then((doc)=>{
+      .then(()=>{
+        console.log('Pelicula agregada a la libreria');
+        return 'success'
+      })
+      .catch((error)=>{
+        console.log('error de:'+ error);
+        return 'Error'
+      });    
+  }
+
+  getUsuario(){
+    return this.userService.getCurrentUser();
+  }
+
+  public async getLibraryByUser(userId: string): Promise<Library | undefined> {
+    const libraryArray = await this.library.toPromise(); // Convert Observable to Promise
+    const l = libraryArray!.find((library: Library) => library.user === userId);
+    return l;
+  }
+
+  public async addLibrary(library: Library): Promise<string> {
+    return this.firestore.collection('library').add(library)
+      .then(()=>{
+        console.log('Libreria creada');
+        return 'success'
+      })
+      .catch((error)=>{
+        console.log('error de:'+ error);
+        return 'Error'
+      });
+  }
+
+  public async updateLibrary(library: Library): Promise<string> {
+    return this.firestore.collection('library').doc(library.user).update(library)
+      .then(()=>{
         console.log('Libreria actualizada');
         return 'success'
       })
@@ -51,4 +82,6 @@ export class LibraryService {
         return 'Error'
       });
   }
+
+
 }
