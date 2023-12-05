@@ -29,97 +29,44 @@
         [(ngModel)]="filter"
         (ionChange)="filterMovies()"
         >
-        <ion-select-option value="Drama">
-          Drama
-        </ion-select-option>
-        <ion-select-option value="Comedia">
-          Comedia
-        </ion-select-option>
-        <ion-select-option value="Terror">
-          Terror
-        </ion-select-option>
-        <ion-select-option value="Accion">
-          Accion
-        </ion-select-option>
-        <ion-select-option value="Suspenso">
-          Suspenso
-        </ion-select-option>
-        <ion-select-option value="Infantil">
-          Infantil
-        </ion-select-option>
-        <ion-select-option value="Ciencia Ficcion">
-          Ciencia Ficcion
-        </ion-select-option>
-        <ion-select-option value="Musical">
-          Musical
-        </ion-select-option>
-        <ion-select-option value="Romance">
-          Romance
-        </ion-select-option>
-        <ion-select-option value="Documental">
-          Documental
-        </ion-select-option>
-        <ion-select-option value="Animacion">
-          Animacion
-        </ion-select-option>
-        <ion-select-option value="Fantasia">
-          Fantasia
-        </ion-select-option>
-        <ion-select-option value="Crimen">
-          Crimen
-        </ion-select-option>
-        <ion-select-option value="Misterio">
-          Misterio
-        </ion-select-option>
-        <ion-select-option value="Guerra">
-          Guerra
-        </ion-select-option>
-        <ion-select-option value="Western">
-          Western
-        </ion-select-option>
-        <ion-select-option value="Biografia">
-          Biografia
-        </ion-select-option>
-        <ion-select-option value="Deporte">
-          Deporte
-        </ion-select-option>
-        <ion-select-option value="Historia">
-          Historia
-        </ion-select-option>
-        <ion-select-option value="Familia">
-          Familia
-        </ion-select-option>
-        <ion-select-option value="Musica">
-          Musica
-        </ion-select-option>
-        <ion-select-option value="Aventura">
-          Aventura
-        </ion-select-option>
-        <ion-select-option value="Cortometraje">
-          Cortometraje
-        </ion-select-option>
-        <ion-select-option value="Adulto">
-          Adulto
-        </ion-select-option>
-        
+          <ion-select-option value="Drama">Drama</ion-select-option>
+          <ion-select-option value="Comedia">Comedia</ion-select-option>
+          <ion-select-option value="Acción">Acción</ion-select-option>
+          <ion-select-option value="Terror">Terror</ion-select-option>
+          <ion-select-option value="Ciencia Ficción">Ciencia Ficción</ion-select-option>
+          <ion-select-option value="Musical">Musical</ion-select-option>
+          <ion-select-option value="Infantil">Infantil</ion-select-option>
+          <ion-select-option value="Animación">Animación</ion-select-option>
+          <ion-select-option value="Suspenso">Suspenso</ion-select-option>
+          <ion-select-option value="Documental">Documental</ion-select-option>
+          <ion-select-option value="Romance">Romance</ion-select-option>
+          <ion-select-option value="Fantasía">Fantasía</ion-select-option>
+          <ion-select-option value="Aventura">Aventura</ion-select-option>
+          <ion-select-option value="Bélico">Bélico</ion-select-option>
+          <ion-select-option value="Crimen">Crimen</ion-select-option>
+          <ion-select-option value="Misterio">Misterio</ion-select-option>
+          <ion-select-option value="Biografico">Biografico</ion-select-option>
+          <ion-select-option value="Histórico">Histórico</ion-select-option>
+          <ion-select-option value="Deportivo">Deportivo</ion-select-option>
+          <ion-select-option value="Western">Western</ion-select-option>
+          <ion-select-option value="Guerra">Guerra</ion-select-option>
+
         </ion-select>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col size="6" *ngFor="let movie of moviesFounds; index as i">
+      <ion-col size="2" *ngFor="let movie of moviesFounds; index as i">
         <ion-card>
-          <img [src]="movie.portada+i"/>
+          <img [src]="movie.portada"/>
+          
           <ion-card-header>
             <ion-card-title>
               {{movie.titulo}}
-              <ion-badge>alo sans</ion-badge>
+              <ion-badge>{{movie.genero}}</ion-badge>
             </ion-card-title>
             <ion-card-subtitle>{{ movie.precio| currency }}</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            {{movie.sinopsis}}
-          </ion-card-content>
           <ion-button expand="block" (click)="addToCart(movie, i)">
             <ion-icon name="cart-outline" ></ion-icon>
           </ion-button>

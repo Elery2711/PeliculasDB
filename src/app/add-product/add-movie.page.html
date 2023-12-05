@@ -16,40 +16,67 @@
 
   <ion-card>
     <ion-card-content>
-      <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <form [formGroup]="movieForm" (ngSubmit)="saveMovie()">
         <ion-list lines="full">
           <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input type="text" formControlName="name"></ion-input>
+            <ion-label position="floating">Titulo</ion-label>
+            <ion-input type="text" formControlName="titulo"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Precio</ion-label>
-            <ion-input type="number" formControlName="price"></ion-input>
+            <ion-input type="number" formControlName="precio"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">Descripción</ion-label>
-            <ion-textarea formControlName="description"></ion-textarea>
+            <ion-label position="floating">Sinopsis</ion-label>
+            <ion-textarea formControlName="sinopsis"></ion-textarea>
           </ion-item>
 
           <ion-item>
-            <ion-label>Imagen</ion-label>
-            <ion-input type="text" formControlName="photo"></ion-input>
+            <ion-label>Portada</ion-label>
+            <ion-input type="text" formControlName="portada"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label>Tipo</ion-label>
-            <ion-select formControlName="type">
-              <ion-select-option value="Abarrotes">Abarrotes</ion-select-option>
-              <ion-select-option value="Frutas y Verduras">Frutas y Verduras</ion-select-option>
-              <ion-select-option value="Limpieza">Limpieza</ion-select-option>
-              <ion-select-option value="Farmacia">Farmacia</ion-select-option>
+            <ion-label>Genero</ion-label>
+            <ion-select formControlName="genero">
+              <ion-select-option value="Drama">Drama</ion-select-option>
+              <ion-select-option value="Comedia">Comedia</ion-select-option>
+              <ion-select-option value="Acción">Acción</ion-select-option>
+              <ion-select-option value="Terror">Terror</ion-select-option>
+              <ion-select-option value="Ciencia Ficción">Ciencia Ficción</ion-select-option>
+              <ion-select-option value="Musical">Musical</ion-select-option>
+              <ion-select-option value="Infantil">Infantil</ion-select-option>
+              <ion-select-option value="Animación">Animación</ion-select-option>
+              <ion-select-option value="Suspenso">Suspenso</ion-select-option>
+              <ion-select-option value="Documental">Documental</ion-select-option>
+              <ion-select-option value="Romance">Romance</ion-select-option>
+              <ion-select-option value="Fantasía">Fantasía</ion-select-option>
+              <ion-select-option value="Aventura">Aventura</ion-select-option>
+              <ion-select-option value="Bélico">Bélico</ion-select-option>
+              <ion-select-option value="Crimen">Crimen</ion-select-option>
+              <ion-select-option value="Misterio">Misterio</ion-select-option>
+              <ion-select-option value="Biografico">Biografico</ion-select-option>
+              <ion-select-option value="Histórico">Histórico</ion-select-option>
+              <ion-select-option value="Deportivo">Deportivo</ion-select-option>
+              <ion-select-option value="Western">Western</ion-select-option>
+              <ion-select-option value="Guerra">Guerra</ion-select-option>
             </ion-select>
           </ion-item>
+          <ion-item>
+            <ion-label position="floating">Duración</ion-label>
+            <ion-input formControlName="duracion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Director</ion-label>
+            <ion-input formControlName="director"></ion-input>
+          </ion-item>
+
         </ion-list>
 
-        <ion-button expand="block" type="submit" [disabled]="!productForm.valid">Guardar</ion-button>
+        <ion-button expand="block" type="submit" [disabled]="!movieForm.valid">Guardar</ion-button>
       </form>
     </ion-card-content>
   </ion-card>

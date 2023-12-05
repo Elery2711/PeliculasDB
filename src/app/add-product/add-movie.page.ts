@@ -11,7 +11,7 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./add-movie.page.scss'],
 })
 export class AddMoviePage {
-  public productForm: FormGroup;
+  public movieForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,18 +19,20 @@ export class AddMoviePage {
     private toastController: ToastController,
     private router: Router
   ) {
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      price: ['', Validators.required],
-      description: [''],
-      photo: [''],
-      type: ['', Validators.required],
+    this.movieForm = this.formBuilder.group({
+      titulo: ['', Validators.required],
+      sinopsis: ['', Validators.required],
+      genero: ['', Validators.required],
+      duracion: ['', Validators.required],
+      director: ['', Validators.required],
+      portada: ['', Validators.required],
+      precio: ['', Validators.required],
     });
   }
 
-  async saveProduct() {
-    if (this.productForm.valid) {
-      const movie = this.productForm.value;
+  async saveMovie() {
+    if (this.movieForm.valid) {
+      const movie = this.movieForm.value;
 
       this.moviesService
         .addMovie(movie)
