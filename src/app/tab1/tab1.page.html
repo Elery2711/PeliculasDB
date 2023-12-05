@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Productos </ion-title>
-   
   </ion-toolbar>
 </ion-header>
 
@@ -109,7 +108,7 @@
     <ion-row>
       <ion-col size="6" *ngFor="let movie of moviesFounds; index as i">
         <ion-card>
-          <img (click)="openViewMovie(movie.titulo)" [src]="movie.portada+i"/>
+          <img (click)="openViewMovie(movie.titulo)" [src]="movie.portada"/>
           <ion-card-header>
             <ion-card-title>
               {{movie.titulo}}

@@ -11,12 +11,16 @@ export class ViewMoviePage{
   public viewForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private moviesService: MoviesService) { 
+    const movie = this.moviesService.moviewhere || {}; 
     this.viewForm = this.formBuilder.group({
-      titulo: [this.moviesService.moviewhere.titulo, Validators.required]
+      titulo: [movie.titulo, Validators.required],
+      genero: [movie.genero, Validators.required],
+      duracion: [movie.duracion, Validators.required],
+      director: [movie.director, Validators.required],
+      sinopsis: [movie.sinopsis, Validators.required],
+      portada: [movie.portada, Validators.required],
+      precio: [movie.precio, Validators.required]
     })
-  }
-
-  ngOnInit() {
   }
 
 }
