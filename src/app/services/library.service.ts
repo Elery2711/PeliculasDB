@@ -52,36 +52,4 @@ export class LibraryService {
   getUsuario(){
     return this.userService.getCurrentUser();
   }
-
-  public async getLibraryByUser(userId: string): Promise<Library | undefined> {
-    const libraryArray = await this.library.toPromise(); // Convert Observable to Promise
-    const l = libraryArray!.find((library: Library) => library.user === userId);
-    return l;
-  }
-
-  public async addLibrary(library: Library): Promise<string> {
-    return this.firestore.collection('library').add(library)
-      .then(()=>{
-        console.log('Libreria creada');
-        return 'success'
-      })
-      .catch((error)=>{
-        console.log('error de:'+ error);
-        return 'Error'
-      });
-  }
-
-  public async updateLibrary(library: Library): Promise<string> {
-    return this.firestore.collection('library').doc(library.user).update(library)
-      .then(()=>{
-        console.log('Libreria actualizada');
-        return 'success'
-      })
-      .catch((error)=>{
-        console.log('error de:'+ error);
-        return 'Error'
-      });
-  }
-
-
 }

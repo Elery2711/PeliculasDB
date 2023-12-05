@@ -87,27 +87,5 @@ export class Tab1Page {
   getUsuario(){
     return this.userService.getCurrentUser();
   }
-
-  public addMovieToLibrary(movie: Pelicula): void {
-    var doc = this.getUsuario()!.uid;
-    var library: Library = {
-      items: [],
-      user: doc
-    };
-    this.LibraryService.getLibraryByUser(doc).then((doc) => {
-      if(doc == undefined){
-        this.LibraryService.addLibrary(library);
-        console.log('Libreria creada');
-      }
-      else{
-        console.log('Libreria ya existe');
-      }
-    }
-    )
-    this.LibraryService.addMovieToLibrary(movie, doc);
-
-    
-  }
-
   
 }

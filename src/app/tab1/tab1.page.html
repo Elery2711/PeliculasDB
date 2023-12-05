@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Peliculas {{getUsuario()?.uid}}</ion-title>
+    <ion-title> Bienvenido {{getUsuario()?.email}}</ion-title>
    
   </ion-toolbar>
 </ion-header>
@@ -66,7 +66,7 @@
             </ion-card-title>
             <ion-card-subtitle>{{ movie.precio| currency }}</ion-card-subtitle>
           </ion-card-header>
-          <ion-button expand="block" (click)="addMovieToLibrary(movie)">
+          <ion-button expand="block" (click)="addToCart(movie)">
             <ion-icon name="cart-outline" ></ion-icon>
           </ion-button>
         </ion-card>
