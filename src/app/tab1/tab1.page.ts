@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Pelicula } from '../models/pelicula.model';
 import { Router } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
-import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart-service.service';
 
 @Component({
@@ -38,7 +37,7 @@ export class Tab1Page {
     'Guerra'
   ];
 
-  constructor(private cartService: CartService, private router: Router, private moviesService: MoviesService, private authService: AuthService) {
+  constructor(private cartService: CartService, private router: Router, private moviesService: MoviesService) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
       this.moviesFounds = this.movies;
@@ -65,10 +64,8 @@ export class Tab1Page {
     this.router.navigate(['/add-movie']); // Asume que la ruta 'product-add' existe para añadir productos.
   }
 
-  public logout() {
-    this.authService.logout();
+  logOut(){
     this.router.navigate(['/login']);
   }
-  
 
 }
