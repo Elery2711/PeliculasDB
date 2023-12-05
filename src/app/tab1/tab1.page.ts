@@ -3,6 +3,7 @@ import { Pelicula } from '../models/pelicula.model';
 import { Router } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
 import { CartService } from '../services/cart-service.service';
+import { UserService } from '../services/user.service';
 import { LibraryService } from '../services/library.service';
 
 @Component({
@@ -38,7 +39,7 @@ export class Tab1Page {
     'Guerra'
   ];
 
-  constructor(private cartService: CartService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService) {
+  constructor(private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
       this.moviesFounds = this.movies;
@@ -66,6 +67,10 @@ export class Tab1Page {
 
   logOut(){
     this.router.navigate(['/login']);
+  }
+
+  getUsuario(){
+    return this.userService.getCurrentUser();
   }
 
   public addMovieToLibrary(movie: Pelicula): void {
