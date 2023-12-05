@@ -58,8 +58,7 @@
     <ion-row>
       <ion-col size="2" *ngFor="let movie of moviesFounds; index as i">
         <ion-card>
-          <img [src]="movie.portada"/>
-          
+          <img (click)="openViewMovie(movie.titulo)" [src]="movie.portada"/>
           <ion-card-header>
             <ion-card-title>
               {{movie.titulo}}

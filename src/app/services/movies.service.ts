@@ -7,7 +7,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
   providedIn: 'root'
 })
 export class MoviesService {
-  private movieCollection: AngularFirestoreCollection<Pelicula>;
+  public movieCollection: AngularFirestoreCollection<Pelicula>;
   private movie: Observable<Pelicula[]>;
   public pos = 0;
   public moviewhere: Pelicula = {

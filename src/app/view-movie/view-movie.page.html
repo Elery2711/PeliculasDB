@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Película</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="film-info">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="viewForm" class="film-form">
+
+        <ion-label class="film-title">{{ viewForm.get('titulo')?.value }}</ion-label>
+        <br>
+        <img [src]="viewForm.get('portada')?.value" class="film-poster"/>
+        <br> <br>
+        
+        <ion-label class="film-detail">Género:</ion-label>
+        <br>
+        <ion-label>{{ viewForm.get('genero')?.value }}</ion-label>
+        <br><br>
+        
+        <ion-label class="film-detail">Duración:</ion-label>
+        <br>
+        <ion-label>{{ viewForm.get('duracion')?.value }}</ion-label>
+        <br><br>
+
+        <ion-label class="film-detail">Director:</ion-label>
+        <br>
+        <ion-label>{{ viewForm.get('director')?.value }}</ion-label>
+        <br><br>
+
+        <ion-label class="film-detail">Sinopsis:</ion-label>
+        <br>
+        <ion-label>{{ viewForm.get('sinopsis')?.value }}</ion-label>
+        <br><br>
+
+        <ion-label class="film-detail">Precio:</ion-label>
+        <br>
+        <ion-label>{{ viewForm.get('precio')?.value }}</ion-label>
+      
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
