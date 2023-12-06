@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
-import { Pelicula } from '../models/pelicula.model';
-import { Router } from '@angular/router';
-import { MoviesService } from '../services/movies.service';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart-service.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { MoviesService } from '../services/movies.service';
 import { LibraryService } from '../services/library.service';
-import { Library } from '../models/pelicula.model';
+import { Pelicula } from '../models/pelicula.model';
+import { LoginPage } from '../login/login.page';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-vista-admin',
+  templateUrl: './vista-admin.page.html',
+  styleUrls: ['./vista-admin.page.scss'],
 })
-export class Tab1Page {
+export class VistaAdminPage  {
 
   public movies: Pelicula[] = [];
+  public products: Pelicula[] = [];
   public moviesFounds: Pelicula[] = [];
   public filter = [
     'Drama',
@@ -40,7 +41,7 @@ export class Tab1Page {
     'Guerra'
   ];
 
-  constructor(private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService) {
+  constructor( private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
       this.moviesFounds = this.movies;
@@ -60,6 +61,20 @@ export class Tab1Page {
     this.router.navigate(['/view-movie']);
     
   }
+
+  openMovieUpdatePage(name:string) {
+    this.moviesService.pos = this.movies.findIndex(item => item.titulo == name);
+    this.moviesService.moviewhere = this.movies[this.moviesService.pos];
+    this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
+      this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
+    });
+    console.log(this.moviesService.moviewhere);
+    
+    
+    this.router.navigate(['/update-movie']);
+    
+  }
+
 
   public filterMovies(): void {
     console.log(this.filter);
@@ -88,17 +103,10 @@ export class Tab1Page {
     return this.userService.getCurrentUser();
   }
 
-  openMovieUpdatePage(name:string) {
-    this.moviesService.pos = this.movies.findIndex(item => item.titulo == name);
-    this.moviesService.moviewhere = this.movies[this.moviesService.pos];
-    this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
-      this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
-    });
-    console.log(this.moviesService.moviewhere);
-    
-    
-    this.router.navigate(['/update-movie']);
-    
+  deleteProduct(movie: Pelicula) {
+    console.log(this.moviesService.DeleteAndgetId(movie));
   }
-  
+
+
+
 }

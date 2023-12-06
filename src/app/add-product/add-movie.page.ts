@@ -4,6 +4,7 @@ import { MoviesService } from '../services/movies.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { async } from '@angular/core/testing';
+import { Pelicula } from '../models/pelicula.model';
 
 @Component({
   selector: 'app-add-movie',
@@ -12,6 +13,7 @@ import { async } from '@angular/core/testing';
 })
 export class AddMoviePage {
   public movieForm: FormGroup;
+  public products: Pelicula[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,9 +40,9 @@ export class AddMoviePage {
         .addMovie(movie)
         .then(async (response) =>{
           if (response == "success") {
-            console.log('Producto guardado exitosamente:', response);
+            console.log('Pelicula guardado exitosamente:', response);
             const toast = await this.toastController.create({
-              message: 'Producto guardado correctamente',
+              message: 'Pelicula guardado correctamente',
               duration: 2000, // Duración de 2 segundos
               position: 'top', // Posición superior
             });
@@ -58,9 +60,9 @@ export class AddMoviePage {
       );
     }
 
-    
-
     // Redirigir a la pestaña tab1
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/vista-admin']);
   }
+
+
 }

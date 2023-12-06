@@ -16,13 +16,15 @@
       <ion-input class="form-control" formControlName="password" type="password"></ion-input>
     </ion-item>
 
-    <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
-    <ion-button color="danger" expand="full" class="btn btn-info" (click)="register()">Registrarse</ion-button>
-    <ion-button color="danger" expand="full" class="btn btn-info" (click)="getemail()">Correo</ion-button>
+    <ion-button expand="full" type="submit" color="primary" shape="round">Iniciar Sesión</ion-button>
+    <ion-button expand="full"  color="warning" shape="round" (click)="onClick()">Iniciar con Google</ion-button>
   </form>
   <ion-item>
     
-    <ion-button class="btn btn-info" (click)="onClick()">Login With Google</ion-button>
+    
+    <ion-button color="danger" expand="full" class="btn btn-info" shape="round" (click)="register()">Registrarse</ion-button>
+
+
   </ion-item>
 
 </ion-content>

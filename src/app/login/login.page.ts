@@ -51,9 +51,11 @@ export class LoginPage implements OnInit{
   async onSubmit() {
     if(this.getemail()=='mderobles' && this.getpassword()=='1234' || 
         this.getemail()=='vvazquez' && this.getpassword()=='1234'||
-        this.getemail()=='eramirez' && this.getpassword()=='1234')
+        this.getemail()=='eramirez' && this.getpassword()=='1234' ||
+        this.getemail()=='smedina' && this.getpassword()=='1234' ||
+        this.getemail()=='ehernandez' && this.getpassword()=='1234')
         
-    {this.router.navigate(['/tabs/tab2']);}
+    {this.router.navigate(['/vista-admin']);}
     else{
       this.userService.login(this.loginForm.value)
     .then(response => {
@@ -89,5 +91,7 @@ onClick(){
   getCurrentUser() {
     return this.userService.getCurrentUser();
   }
+
+  
 
 }

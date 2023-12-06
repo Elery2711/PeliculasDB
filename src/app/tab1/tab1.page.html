@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Bienvenido {{getUsuario()?.email}}</ion-title>
+    <ion-title> Bienvenido < {{getUsuario()?.displayName}} ></ion-title>
    
   </ion-toolbar>
 </ion-header>
@@ -11,9 +11,6 @@
       <ion-icon name="chevron-down-circle"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="bottom">
-      <ion-fab-button (click)="openMovieAddPage()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
       <ion-fab-button>
         <ion-icon name="log-out-outline" (click)="logOut()"></ion-icon>
       </ion-fab-button>
@@ -69,6 +66,8 @@
           <ion-button expand="block" (click)="addToCart(movie)">
             <ion-icon name="cart-outline" ></ion-icon>
           </ion-button>
+
+         
         </ion-card>
       </ion-col>
     </ion-row>

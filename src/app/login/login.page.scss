@@ -1,0 +1,14 @@
+.btn-google {
+   
+    color: #ffffff; /* Texto en blanco */
+    
+  
+    &:hover {
+      background-color: #d6cb33; /* Cambio de color al pasar el ratón por encima */
+    }
+  
+    &:active {
+      background-color: #0a6b12; /* Cambio de color al hacer clic en el botón */
+    }
+  }
+  

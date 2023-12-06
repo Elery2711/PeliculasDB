@@ -59,14 +59,54 @@ export class MoviesService {
   }
 
   // Método para actualizar una película
-  updateMovie(movie: Pelicula): Promise <string> {
+  
+
+  DeleteAndgetId(movie: Pelicula) {
+    this.FireStore.collection('movies', ref =>
+      ref.where('director', '==', movie.director)
+         .where('duracion', '==', movie.duracion)
+         .where('genero', '==', movie.genero)
+         .where('portada', '==', movie.portada)
+         .where('sinopsis', '==', movie.sinopsis)
+         .where('titulo', '==', movie.titulo)
+         .where('precio', '==', movie.precio)
+    )
+    .get()
+    .subscribe(querySnapshot => {
+      if (querySnapshot.size > 0) {
+        const isConfirmed = confirm('¿Estás seguro de que deseas eliminar esta pelicula?');
+        
+        if (isConfirmed) {
+          querySnapshot.forEach(doc => {
+            const docId = doc.id;
+  
+            this.FireStore.collection('movies').doc(docId).delete()
+              .then(() => {
+                console.log('Pelicula eliminada exitosamente.');
+              })
+              .catch(error => {
+                console.error('Error al eliminar el Pelicula:', error);
+              });
+          });
+        } else {
+          console.log('La eliminación de la Pelicula fue cancelada.');
+        }
+      } else {
+        console.log('Pelicula no encontrada.');
+      }
+    });
+  }
+
+
+  updateMovie(movie:Pelicula):Promise<string>{
     return this.movieCollection.doc(movie.id).update(movie)
     .then((doc)=>{
       console.log('Pelicula actualizada con id'+ movie.id);
+  
       return 'success'
     })
     .catch((error)=>{
-      console.log('Error al actualizar pelicula'+ error);
+      console.log('Error al actualizar Pelicula'+ error);
       return 'Error'
     });
   }
