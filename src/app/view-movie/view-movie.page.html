@@ -39,7 +39,11 @@
 
         <ion-label class="film-detail">Precio:</ion-label>
         <br>
-        <ion-label>{{ viewForm.get('precio')?.value }}</ion-label>
+        <ion-label>{{ viewForm.get('precio')?.value | currency }}</ion-label>
+
+        <ion-button expand="block" (click)="addToCart(viewForm.value)" class="boton-carrito">
+          <ion-icon name="cart-outline" ></ion-icon>
+        </ion-button>
       
       </form>
     </ion-card-content>
