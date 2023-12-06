@@ -6,6 +6,7 @@ import { CartService } from '../services/cart-service.service';
 import { UserService } from '../services/user.service';
 import { LibraryService } from '../services/library.service';
 import { Library } from '../models/pelicula.model';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -40,7 +41,7 @@ export class Tab1Page {
     'Guerra'
   ];
 
-  constructor(private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService, ) {
+  constructor(private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService, private toastController: ToastController) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
       this.moviesFounds = this.movies;
@@ -70,9 +71,15 @@ export class Tab1Page {
     );
   }
 
-  public addToCart(movie: Pelicula) {
+  public async addToCart(movie: Pelicula) {
     this.cartService.addToCart(movie);
     console.log(this.cartService.getCart());
+    const toast = await this.toastController.create({
+      message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 
   openMovieAddPage() {

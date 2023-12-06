@@ -31,7 +31,7 @@ export class ViewMoviePage{
     this.cartService.addToCart(movie);
     console.log(this.cartService.getCart());
     const toast = await this.toastController.create({
-      message: '¡Producto añadido al carrito!',
+      message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
       duration: 2000,
       position: 'top'
     });
