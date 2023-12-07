@@ -18,13 +18,18 @@ const routes: Routes = [
   {
     path: 'view-movie',
     loadChildren: () => import('./view-movie/view-movie.module').then( m => m.ViewMoviePageModule)
-  },  {
+  },
+  {
     path: 'vista-admin',
     loadChildren: () => import('./vista-admin/vista-admin.module').then( m => m.VistaAdminPageModule)
   },
   {
     path: 'update-movie',
     loadChildren: () => import('./update-movie/update-movie.module').then( m => m.UpdateMoviePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   }
 
 
