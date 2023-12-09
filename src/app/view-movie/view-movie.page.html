@@ -41,9 +41,21 @@
         <br>
         <ion-label>{{ viewForm.get('precio')?.value | currency }}</ion-label>
 
-        <ion-button expand="block" (click)="addToCart(viewForm.value)" class="boton-carrito">
-          <ion-icon name="cart-outline" ></ion-icon>
-        </ion-button>
+        <ion-row class="col">
+          <ion-col size="6" class="ion-text-center">
+            <ion-button expand="block" (click)="addToCart(viewForm.value)" class="boton-carrito">
+              <ion-label style="margin-right: 5px;">Añadir al carrito</ion-label>
+              <ion-icon name="cart-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        
+          <ion-col size="6" class="ion-text-center">
+            <ion-button expand="block" (click)="openCalificarPelicula()" class="boton-carrito"  color="warning">
+              <ion-label style="margin-right: 5px;">Calificar pelicula</ion-label>
+              <ion-icon name="star-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
       
       </form>
     </ion-card-content>

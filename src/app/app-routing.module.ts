@@ -30,7 +30,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'calificar-pelicula',
+    loadChildren: () => import('./calificar-pelicula/calificar-pelicula.module').then( m => m.CalificarPeliculaPageModule)
   }
+
 
 
 ];
