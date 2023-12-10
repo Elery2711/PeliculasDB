@@ -1,8 +1,3 @@
-export interface Comentario {
-  comentario: string;
-  estrellas: string;
-}
-
 export interface Pelicula {
   id?: string;
   titulo: string;
@@ -12,7 +7,7 @@ export interface Pelicula {
   sinopsis: string;
   portada: string;
   precio: number;
-  comentarios?: Comentario[];
+  comentarios?: string[];
 }
 
 export interface CartItem {

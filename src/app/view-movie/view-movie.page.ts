@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ViewMoviePage{
   public viewForm: FormGroup;
   public moviesFounds: Pelicula[] = [];
+  public movies: Pelicula[] = [];
 
   constructor(private formBuilder: FormBuilder, private moviesService: MoviesService, private cartService : CartService, private toastController: ToastController, private router: Router) { 
     const movie = this.moviesService.moviewhere || {}; 
@@ -24,8 +25,14 @@ export class ViewMoviePage{
       director: [movie.director, Validators.required],
       sinopsis: [movie.sinopsis, Validators.required],
       portada: [movie.portada, Validators.required],
-      precio: [movie.precio, Validators.required]
+      precio: [movie.precio, Validators.required],
+      id: [movie.id]
     })
+
+    this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
+      this.movies = movies;
+      this.moviesFounds = this.movies;
+    });
   }
 
   public async addToCart(movie: Pelicula) {
@@ -39,7 +46,12 @@ export class ViewMoviePage{
     toast.present();
   }
 
-  openCalificarPelicula() {
+  openCalificarPelicula(id:string) {
+    this.moviesService.pos = this.movies.findIndex(item => item.id == id);
+    this.moviesService.moviewhere = this.movies[this.moviesService.pos];
+    this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
+      this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
+    });  
     this.router.navigate(['/calificar-pelicula']); // Asume que la ruta 'product-add' existe para añadir productos.
   }
 

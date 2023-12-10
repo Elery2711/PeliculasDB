@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Pelicula } from '../models/pelicula.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { flatten } from 'lodash'; // o puedes utilizar otra forma de aplanar arrays
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class MoviesService {
   constructor(private FireStore: AngularFirestore) { 
     this.movieCollection = this.FireStore.collection<Pelicula>('movies');
     this.movie = this.movieCollection.valueChanges();
-   }
+  }
 
 
   // Método para obtener todas las películas
@@ -43,6 +45,34 @@ export class MoviesService {
       console.log('Error al eliminar pelicula'+ error);
       return 'Error'
     });
+  }
+
+  
+  async comentariosMovie(movie: Pelicula, comentario: string[]): Promise<string> {
+    const movieId = movie.id;
+  
+    return from(this.movieCollection.doc(movieId).get()).pipe(
+      switchMap((doc) => {
+        if (doc.exists) {
+          const comentariosActuales = doc.data()?.comentarios || []; // Obtener los comentarios existentes
+          const comentariosActualizados = [comentariosActuales, comentario]; // Agregar el nuevo comentario
+          const comentariosAplanados = flatten(comentariosActualizados);
+  
+          // Actualizar la película con los comentarios actualizados
+          return from(this.movieCollection.doc(movieId).update({ comentarios: comentariosAplanados }));
+        } else {
+          return Promise.reject('No se encontró la película');
+        }
+      })
+    ).toPromise()
+      .then(() => {
+        console.log('Pelicula editada con id ' + movieId);
+        return 'success';
+      })
+      .catch((error) => {
+        console.log('Error al editar película ' + error);
+        return 'Error';
+      });
   }
 
   // Método para agregar una película

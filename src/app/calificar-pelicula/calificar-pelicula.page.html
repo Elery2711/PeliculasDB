@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <form (ngSubmit)="submitForm()" #form="ngForm">
+<ion-content [fullscreen]="true" *ngIf="movie">
+  <form (ngSubmit)="submitForm(movie)" #form="ngForm">
     <ion-item>
       <ion-label position="floating">Comentario sobre la película</ion-label>
       <ion-textarea rows="4" [(ngModel)]="comment" name="comment" required></ion-textarea>
@@ -27,4 +27,8 @@
 
     <ion-button expand="block" type="submit" [disabled]="form.invalid">Enviar</ion-button>
   </form>
+
+  <div *ngIf="movie">
+    <h2>{{ movie.id }}</h2>
+  </div>
 </ion-content>
