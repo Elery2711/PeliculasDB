@@ -7,7 +7,7 @@ export interface Pelicula {
   sinopsis: string;
   portada: string;
   precio: number;
-  comentarios?: string[];
+  comentarios?: { usuario: string; correo: string; comentario: string; estrellas: number; }[];
 }
 
 export interface CartItem {

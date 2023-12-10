@@ -26,7 +26,8 @@ export class ViewMoviePage{
       sinopsis: [movie.sinopsis, Validators.required],
       portada: [movie.portada, Validators.required],
       precio: [movie.precio, Validators.required],
-      id: [movie.id]
+      id: [movie.id],
+      comentario: [movie.comentarios]
     })
 
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {

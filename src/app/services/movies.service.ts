@@ -48,18 +48,19 @@ export class MoviesService {
   }
 
   
-  async comentariosMovie(movie: Pelicula, comentario: string[]): Promise<string> {
+  async comentariosMovie(movie: Pelicula, usuario:string, correo: string, comentario: string, estrellas: number): Promise<string> {
     const movieId = movie.id;
   
     return from(this.movieCollection.doc(movieId).get()).pipe(
       switchMap((doc) => {
         if (doc.exists) {
           const comentariosActuales = doc.data()?.comentarios || []; // Obtener los comentarios existentes
-          const comentariosActualizados = [comentariosActuales, comentario]; // Agregar el nuevo comentario
-          const comentariosAplanados = flatten(comentariosActualizados);
+          const nuevoComentario = { usuario, correo, comentario, estrellas }; 
+          const comentariosActualizados = [...comentariosActuales, nuevoComentario];
+          //const comentariosAplanados = flatten(comentariosActualizados);
   
           // Actualizar la película con los comentarios actualizados
-          return from(this.movieCollection.doc(movieId).update({ comentarios: comentariosAplanados }));
+          return from(this.movieCollection.doc(movieId).update({ comentarios: comentariosActualizados}));
         } else {
           return Promise.reject('No se encontró la película');
         }
