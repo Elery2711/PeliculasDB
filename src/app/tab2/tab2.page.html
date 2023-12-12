@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list *ngIf="cart.items.length > 0">
     <ion-item *ngFor="let item of cart.items">
       <ion-thumbnail slot="start">
         <img [src]="item.movie.portada" alt="{{ item.movie.titulo }}">
@@ -18,9 +18,18 @@
       </ion-label>
       <ion-button (click)="promptRemoveItem(item)">Eliminar</ion-button>
     </ion-item>
+    <ion-item>
+      <ion-label>Total:</ion-label>
+      <ion-note slot="end" class="total-amount">{{ cart.total | currency:'MXN':'symbol':'1.2-2' }}</ion-note>
+    </ion-item>
+    <ion-item style="text-align: center;">
+      <ion-button expand="full" (click)="realizarPago()">Pagar</ion-button>
+    </ion-item>
   </ion-list>
-  <ion-item>
-    <ion-label>Total:</ion-label>
-    <ion-note slot="end" class="total-amount">{{ cart.total | currency:'MXN':'symbol':'1.2-2' }}</ion-note>
-  </ion-item>
+  <div *ngIf="cart.items.length === 0" style="text-align: center; padding: 20px; font-size: 1.2rem; color: #888;">El carrito está vacío.</div>
+  <!-- <ng-template #noItems>
+    <div class="no-items-message">
+      <p>No hay películas en el carrito.</p>
+    </div>
+  </ng-template> -->
 </ion-content>

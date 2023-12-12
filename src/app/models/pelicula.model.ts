@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 
 export interface Pelicula {
   id?: string;
@@ -8,6 +9,7 @@ export interface Pelicula {
   sinopsis: string;
   portada: string;
   precio: number;
+  comentarios?: { usuario: string; correo: string; comentario: string; estrellas: number; }[];
 }
 
 export interface CartItem {
@@ -24,4 +26,10 @@ export interface Cart {
 export interface Library {
   items: Pelicula[];
   user: string;
+}
+
+export interface Purchase {
+  fecha: Date;
+  user: string | undefined;
+  productos: Cart;
 }

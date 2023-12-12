@@ -17,6 +17,7 @@ export class Tab1Page {
 
   public movies: Pelicula[] = [];
   public moviesFounds: Pelicula[] = [];
+  public car: { [productId: number]: { movie: Pelicula, quantity: number } } = {};
   public filter = [
     'Drama',
     'Comedia',
@@ -41,7 +42,14 @@ export class Tab1Page {
     'Guerra'
   ];
 
-  constructor(private cartService: CartService, private userService: UserService, private router: Router, private moviesService: MoviesService , private LibraryService: LibraryService, private toastController: ToastController) {
+  constructor(
+    private cartService: CartService,
+    private userService: UserService,
+    private router: Router,
+    private moviesService: MoviesService,
+    private LibraryService: LibraryService,
+    private toastController: ToastController
+  ) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
       this.moviesFounds = this.movies;
@@ -49,17 +57,17 @@ export class Tab1Page {
 
   }
 
-  openViewMovie(titulo:string) {
+  openViewMovie(titulo: string) {
     this.moviesService.pos = this.movies.findIndex(item => item.titulo == titulo);
     this.moviesService.moviewhere = this.movies[this.moviesService.pos];
     this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
       this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
     });
     console.log(this.moviesService.moviewhere);
-    
-    
+
+
     this.router.navigate(['/view-movie']);
-    
+
   }
 
   public filterMovies(): void {
@@ -73,7 +81,6 @@ export class Tab1Page {
 
   public async addToCart(movie: Pelicula) {
     this.cartService.addToCart(movie);
-    console.log(this.cartService.getCart());
     const toast = await this.toastController.create({
       message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
       duration: 2000,
@@ -86,26 +93,26 @@ export class Tab1Page {
     this.router.navigate(['/add-movie']); // Asume que la ruta 'product-add' existe para añadir productos.
   }
 
-  logOut(){
+  logOut() {
     this.router.navigate(['/login']);
   }
 
 
-  getUsuario(){
+  getUsuario() {
     return this.userService.getCurrentUser();
   }
 
-  openMovieUpdatePage(name:string) {
+  openMovieUpdatePage(name: string) {
     this.moviesService.pos = this.movies.findIndex(item => item.titulo == name);
     this.moviesService.moviewhere = this.movies[this.moviesService.pos];
     this.moviesService.movieCollection.snapshotChanges().subscribe((data) => {
       this.moviesService.moviewhere.id = data[this.moviesService.pos].payload.doc.id;
     });
     console.log(this.moviesService.moviewhere);
-    
-    
+
+
     this.router.navigate(['/update-movie']);
-    
+
   }
-  
+
 }

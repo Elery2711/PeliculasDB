@@ -18,7 +18,8 @@ export class MoviesService {
     director: '',
     sinopsis: '',
     portada: '',
-    precio: 0
+    precio: 0,
+    comentarios: []
   };
 
   constructor(private FireStore: AngularFirestore) { 
@@ -70,6 +71,7 @@ export class MoviesService {
          .where('sinopsis', '==', movie.sinopsis)
          .where('titulo', '==', movie.titulo)
          .where('precio', '==', movie.precio)
+         .where('comentarios', '==', movie.comentarios)
     )
     .get()
     .subscribe(querySnapshot => {
@@ -97,6 +99,10 @@ export class MoviesService {
     });
   }
 
+  async getMovieById(movieId: string): Promise<Pelicula | undefined> {
+    const snapshot = await this.movieCollection.doc(movieId).ref.get();
+    return snapshot.exists ? snapshot.data() as Pelicula : undefined;
+  }
 
   updateMovie(movie:Pelicula):Promise<string>{
     return this.movieCollection.doc(movie.id).update(movie)
