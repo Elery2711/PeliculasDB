@@ -23,4 +23,15 @@ export class UserService {
   getCurrentUser() {
     return this.auth.currentUser;
   }
+
+  getCurrentUserEmail() {
+    const user = this.auth.currentUser;
+    if (user !== null) {
+      return user.email;
+    } else {
+      return null;
+    }
+  }
+
+  
 }
