@@ -3,7 +3,7 @@ import { from, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Pelicula } from '../models/pelicula.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { flatten } from 'lodash'; // o puedes utilizar otra forma de aplanar arrays
+
 
 @Injectable({
   providedIn: 'root'
