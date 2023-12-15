@@ -123,15 +123,6 @@ export class Tab2Page {
     const alert = await this.alertController.create({
       header: 'Eliminar Pelicula',
       message: `¿Desea eliminar ${item.movie?.titulo}?`,
-      inputs: [
-        {
-          name: 'quantity',
-          type: 'number',
-          min: 1,
-          max: item.quantity,
-          value: '1',
-        },
-      ],
       buttons: [
         {
           text: 'Cancelar',
@@ -140,7 +131,7 @@ export class Tab2Page {
         {
           text: 'Eliminar',
           handler: (data) => {
-            const quantityToRemove = parseInt(data.quantity, 10);
+            const quantityToRemove = 1;
             if (quantityToRemove >= 0 && item.movie) {  // Asegúrate de que item.movie no sea undefined
               console.log('Cantidad:' + quantityToRemove);
               this.cartService.removeItemFromCart(this.cart, item, quantityToRemove);

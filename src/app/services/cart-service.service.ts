@@ -118,7 +118,7 @@ export class CartService {
 
     if (existingCartItemIndex !== -1) {
       // La película ya está en el carrito, aumenta la cantidad en 1
-      this.cart.items[existingCartItemIndex].quantity += 1;
+      //this.cart.items[existingCartItemIndex].quantity += 1;
     } else {
       // La película no está en el carrito, agrégala como un nuevo elemento
       const newItem: CartItem = {
