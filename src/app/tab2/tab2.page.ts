@@ -147,6 +147,10 @@ export class Tab2Page {
   }
   
   async realizarPago() {
+
+    //realizar compra mediante paypal
+    
+
     // Llamada al servicio para realizar la compra
     await this.cartService.realizarCompra(this.cart);
     this.cart = {

@@ -87,15 +87,6 @@ export class Tab1Page {
   //Agrega las pelis al carrito.
   public async addToCart(movie: Pelicula) {
 
-    if (this.cartService.getAgregado() == false) {
-      this.cartService.addToCart(movie);
-      const toast = await this.toastController.create({
-        message: `¡Pelicula "${movie.titulo}" ya está en el carrito o ya la compró!`,
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
-    } else {
       this.cartService.addToCart(movie);
       const toast = await this.toastController.create({
         message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
@@ -103,7 +94,7 @@ export class Tab1Page {
         position: 'top'
       });
       toast.present();
-    }
+    
   }
 
   openMovieAddPage() {
