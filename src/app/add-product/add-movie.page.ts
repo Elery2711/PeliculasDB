@@ -29,6 +29,7 @@ export class AddMoviePage {
       director: ['', Validators.required],
       portada: ['', Validators.required],
       precio: ['', Validators.required],
+      url: ['', Validators.required],
     });
   }
 

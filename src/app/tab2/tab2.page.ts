@@ -62,7 +62,8 @@ export class Tab2Page {
                     portada: movie.portada,
                     precio: movie.precio,
                     sinopsis: movie.sinopsis,
-                    comentarios: movie.comentarios
+                    comentarios: movie.comentarios,
+                    url: movie.url
                   }],
                   quantity: item.quantity || 0
                 };
@@ -79,7 +80,7 @@ export class Tab2Page {
 
           // Filtrar los valores nulos y actualizar la propiedad 'cart'
           const filteredCartDetails = carritoDetails.filter((item) => item !== null) as {
-            items: { id: string; director: string; titulo: string; duracion: string; genero: string; portada: string; precio: number; sinopsis: string; comentarios: [] }[];
+            items: { id: string; director: string; titulo: string; duracion: string; genero: string; portada: string; precio: number; sinopsis: string; comentarios: []; url: string; }[];
             quantity: number;
           }[];
 
@@ -99,6 +100,7 @@ export class Tab2Page {
                 precio: item.items[0].precio,
                 sinopsis: item.items[0].sinopsis,
                 comentarios: item.items[0].comentarios,
+                url: item.items[0].url
               },
               quantity: item.quantity
             })),

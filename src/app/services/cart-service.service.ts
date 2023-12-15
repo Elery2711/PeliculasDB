@@ -17,6 +17,8 @@ interface CarritoDoc {
 })
 export class CartService {
 
+  public agregado: boolean = false;
+
   private cart: Cart = {
     items: [],
     total: 0,
@@ -116,16 +118,42 @@ export class CartService {
   public async addToCart(movie: Pelicula): Promise<Cart> {
     const existingCartItemIndex = this.cart.items.findIndex((item) => item.movie.id === movie.id);
 
+    //verificar si está en el compraservice
+
+    const existingComprasItemIndex = this.compraService.obtenerHistorialCompras(this.userService.getCurrentUser()?.displayName?.toString()).subscribe((data) => {
+      data.forEach((element: any) => {
+        element.productos.items.forEach((element2: any) => {
+          if (element2.movie.id == movie.id) {
+            console.log('Ya lo compraste');
+            console.log(element2);
+            this.agregado = false;
+            return;
+          } else {
+            console.log('No lo compraste');
+            console.log(element2);
+            this.agregado = true;
+            return;
+          }
+        });
+      });
+    });
+
     if (existingCartItemIndex !== -1) {
       // La película ya está en el carrito, aumenta la cantidad en 1
       //this.cart.items[existingCartItemIndex].quantity += 1;
+      console.log("aslo");
+      this.agregado = false;
+
     } else {
       // La película no está en el carrito, agrégala como un nuevo elemento
+
       const newItem: CartItem = {
         movie: movie,
         quantity: 1,
       };
       this.cart.items.push(newItem);
+
+      this.agregado = true;
     }
 
     const nombreUsuario = this.getUsuario()?.displayName;
@@ -256,5 +284,10 @@ export class CartService {
       await this.actualizarCarritoFirestore(nombreUsuario, this.cart);
     }
   }
+
+  public getAgregado(): boolean {
+    return this.agregado;
+  }
+
 
 }

@@ -55,7 +55,7 @@ export class Tab1Page {
       this.moviesFounds = [...this.movies];
     });
 
-    this.filter= ['Todos'];//Este es para que este iniiado en todos mibida.
+    this.filter = ['Todos'];//Este es para que este iniiado en todos mibida.
 
   }
 
@@ -83,16 +83,27 @@ export class Tab1Page {
       );
     }
   }
-  
-//Agrega las pelis al carrito.
+
+  //Agrega las pelis al carrito.
   public async addToCart(movie: Pelicula) {
-    this.cartService.addToCart(movie);
-    const toast = await this.toastController.create({
-      message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
-      duration: 2000,
-      position: 'top'
-    });
-    toast.present();
+
+    if (this.cartService.getAgregado() == false) {
+      this.cartService.addToCart(movie);
+      const toast = await this.toastController.create({
+        message: `¡Pelicula "${movie.titulo}" ya está en el carrito o ya la compró!`,
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    } else {
+      this.cartService.addToCart(movie);
+      const toast = await this.toastController.create({
+        message: `¡Pelicula "${movie.titulo}" añadida al carrito!`,
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   openMovieAddPage() {

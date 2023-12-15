@@ -10,6 +10,7 @@ export interface Pelicula {
   portada: string;
   precio: number;
   comentarios?: { usuario: string; correo: string; comentario: string; estrellas: number; }[];
+  url: string;
 }
 
 export interface CartItem {

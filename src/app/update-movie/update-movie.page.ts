@@ -23,6 +23,7 @@ export class UpdateMoviePage  {
       sinopsis: [this.movieService.moviewhere.sinopsis, Validators.required],
       portada: [this.movieService.moviewhere.portada, Validators.required],
       precio: [this.movieService.moviewhere.precio, Validators.required],
+      url: [this.movieService.moviewhere.url, Validators.required]
     });
    }
 

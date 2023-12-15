@@ -21,7 +21,8 @@ export class MoviesService {
     sinopsis: '',
     portada: '',
     precio: 0,
-    comentarios: []
+    comentarios: [],
+    url: ''
   };
 
   constructor(private FireStore: AngularFirestore) { 
