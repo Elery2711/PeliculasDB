@@ -12,8 +12,7 @@
 
       <div style="overflow-x: auto; white-space: nowrap;">
         <div style="display: inline-flex;">
-          <ion-item *ngFor="let item of compra.productos.items">
-            <ion-thumbnail slot="start">
+          <ion-item *ngFor="let item of compra.productos.items" (click)="redirectTo(item.movie.url)">            <ion-thumbnail slot="start">
               <img [src]="item.movie.portada" alt="Película" style="max-width: 80px; max-height: 80px;">
             </ion-thumbnail>
             <ion-label>

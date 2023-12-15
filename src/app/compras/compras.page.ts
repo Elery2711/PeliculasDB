@@ -54,4 +54,9 @@ export class ComprasPage implements OnDestroy {
       this.historialComprasSubscription.unsubscribe();
     }
   }
+
+  redirectTo(url: string) {
+    window.location.href = url;
+  }
+
 }
