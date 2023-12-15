@@ -52,8 +52,10 @@ export class Tab1Page {
   ) {
     this.moviesService.getAllMovies().subscribe((movies: Pelicula[]) => {
       this.movies = movies;
-      this.moviesFounds = this.movies;
+      this.moviesFounds = [...this.movies];
     });
+
+    this.filter= ['Todos'];//Este es para que este iniiado en todos mibida.
 
   }
 
@@ -71,14 +73,18 @@ export class Tab1Page {
   }
 
   public filterMovies(): void {
-    console.log(this.filter);
-    this.moviesFounds = this.movies.filter(
-      item => {
-        return this.filter.includes(item.genero);
-      }
-    );
+    if (this.filter.includes('Todos')) {
+      // Si "Todos" está seleccionado, muestra todas las películas.
+      this.moviesFounds = [...this.movies];
+    } else {
+      // Y aqui filtra las películas según los géneros seleccionados uwu.
+      this.moviesFounds = this.movies.filter(
+        item => this.filter.includes(item.genero)
+      );
+    }
   }
-
+  
+//Agrega las pelis al carrito.
   public async addToCart(movie: Pelicula) {
     this.cartService.addToCart(movie);
     const toast = await this.toastController.create({

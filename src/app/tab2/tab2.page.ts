@@ -121,8 +121,8 @@ export class Tab2Page {
 
   async promptRemoveItem(item: CartItem) {
     const alert = await this.alertController.create({
-      header: 'Eliminar Producto',
-      message: `¿Cuántos ${item.movie?.titulo} deseas eliminar?`,
+      header: 'Eliminar Pelicula',
+      message: `¿Desea eliminar ${item.movie?.titulo}?`,
       inputs: [
         {
           name: 'quantity',

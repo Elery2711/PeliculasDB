@@ -1,14 +1,68 @@
+ion-header {
+  background-color: #000;
+  color: #fff;
+}
+
+ion-content {
+  --background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  //width: 80%;
+  max-width: 300px;
+  text-align: center;
+  margin: 90px auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+ion-item {
+  margin-bottom: 16px;
+  border-radius: 10px;
+}
+
+ion-input {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+ion-button {
+  margin-top: 16px;
+}
+
+ion-button[color="primary"] {
+  --color: #fff;
+}
+
+ion-button[color="warning"] {
+  --background: #f39c12;
+  --color: #fff;
+}
+
+ion-button[color="danger"] {
+  --background: #e74c3c;
+  --color: #fff;
+}
+
+.btn-register {
+  --background: #2ecc71;
+  --color: #fff;
+}
+
 .btn-google {
-   
-    color: #ffffff; /* Texto en blanco */
-    
+  color: #ffffff;
   
-    &:hover {
-      background-color: #d6cb33; /* Cambio de color al pasar el ratón por encima */
-    }
-  
-    &:active {
-      background-color: #0a6b12; /* Cambio de color al hacer clic en el botón */
-    }
+  &:hover {
+    background-color: #d6cb33;
   }
-  
+
+  &:active {
+    background-color: #0a6b12;
+  }
+}
